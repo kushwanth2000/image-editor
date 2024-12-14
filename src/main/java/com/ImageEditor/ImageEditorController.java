@@ -46,7 +46,8 @@ public class ImageEditorController {
                 int count = success.get() + failed.get() + 1;
                 log.info("Processing for file no: {} {}", count, fileName);
                 MDC.put("filename", fileName);
-                String imagePath = "G:\\Realme\\DCIM\\Camera\\" + fileName;
+//                String imagePath = "G:\\Realme\\DCIM\\Camera\\" + fileName;
+                String imagePath = "C:\\Users\\kushw\\Downloads\\Photos\\" + fileName;
                 log.info("Image path: {}", imagePath);
                 File imageFile = new File(imagePath);
                 try {
@@ -81,6 +82,7 @@ public class ImageEditorController {
         } else {
             log.info("GPS Directory found: {}", gpsDirectory);
             noGeoLocationSetImages.add(fileName);
+            changeExifMetadata(imageFile, fileName, requestObject, imagePath);
         }
 
         //exiftool(imageFile, requestObject, imagePath);
@@ -91,6 +93,8 @@ public class ImageEditorController {
     public static void changeExifMetadata( File jpegImageFile, String fileName , RequestObject requestObject, String imagePath) throws IOException {
             TiffOutputSet outputSet = null;
              String destinationImagePath = "G:\\Realme\\DCIMNew\\Camera\\" + fileName;
+
+             destinationImagePath = "C:\\Users\\kushw\\Downloads\\Photos\\final\\" + fileName;
 
             // note that metadata might be null if no metadata is found.
             final ImageMetadata metadata = Imaging.getMetadata(jpegImageFile);
